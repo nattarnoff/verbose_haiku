@@ -1,13 +1,14 @@
 #Dependancies
 require 'csv'
+require_relative 'Ruby-Syllable-Counter/syllablecount'
 #Class
 class Haiku
 	@file
 	def initialize
-		puts "Making a haiku"
+		puts "Making a haiku\n-------------------\n\n"
 		filename = "words.csv"
 		@file = CSV.read(filename)
-		puts make_poem
+		puts make_poem+"\n---------------------"
 	end
 
 	def build_line(size)
@@ -29,7 +30,7 @@ class Haiku
 	def get_syllable_count(word)
 		#count vowels aeiou
 		@word = word
-		return @word.scan(/a|e|i|o|u/).size
+		return @word.syllable_count
 	end
      
 	def fetch_random_word
