@@ -14,8 +14,10 @@ class Haiku
 		i = 0
 		line = String.new
 		while i < size  do
-		   line << fetch_random_word << " " 
-		   i += 1
+			new_word = fetch_random_word.downcase
+		  line << new_word << " " 
+		  i += get_syllable_count(new_word)
+		  # puts get_syllable_count(new_word)
 		end
 		return line
 	end
@@ -24,9 +26,11 @@ class Haiku
 		return build_line(5) +"\n" + build_line(7) +"\n"+ build_line(5) +"\n"
 	end
 	
-	# def self.parse_line(line, options = Hash.new)
-	#   new(line, options).shift
-	# end
+	def get_syllable_count(word)
+		#count vowels aeiou
+		@word = word
+		return @word.scan(/a|e|i|o|u/).size
+	end
      
 	def fetch_random_word
 		wordRow =  1 + rand(10000)
