@@ -3,7 +3,7 @@ require 'csv'
 #Class
 class Haiku
 	$file
-	$poem
+	$poem = String.new
 	def initialize
 		puts "Making a haiku"
 		filename = "words.csv"
@@ -12,21 +12,21 @@ class Haiku
 	end
 
 	def build_line(size)
-		$i = 0
-		$num = size
-		$line = ''
-		while $i < $num  do
-		   $line += fetch_random_word
-		   puts $line
-		   $i += 1
+		i = 0
+		line = String.new
+		while i < size  do
+		   line
+		   line << fetch_random_word << " " 
+		   i += 1
 		end
+		return line
 	end
 
 	def make_poem
-		$poem = build_line(5).to_s
-		$poem = build_line(7).to_s
-		$poem = build_line(5).to_s
-		return $poem
+		$poem << build_line(5) <<"\n"
+		$poem << build_line(7) <<"\n"
+		$poem << build_line(5) <<"\n"
+		return $poem.to_s 
 	end
 	
 	# def self.parse_line(line, options = Hash.new)
@@ -35,7 +35,7 @@ class Haiku
      
 	def fetch_random_word
 		wordRow =  1 + rand(10000)
-		return $file[wordRow].to_s
+		return "#{$file[wordRow].join("''")}"
 	end
 end
 
